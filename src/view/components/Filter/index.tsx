@@ -27,6 +27,10 @@ export const Filter: FC = () => {
     const [ active, setActive  ] = useState(false);
     const [ active2, setActive2  ] = useState(false);
 
+    const onSubmit = (event: any) => {
+        event.preventDefault();
+    };
+
     return (
         <ContainerForm>
             <ContainerIndentBotton>
@@ -53,7 +57,7 @@ export const Filter: FC = () => {
                     type = 'number'
                 />
             </ContainerIndentBotton>
-            <Button>Отфильтровать</Button>
+            <Button onClick = { onSubmit }>Отфильтровать</Button>
         </ContainerForm>
     );
 };

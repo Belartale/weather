@@ -4,6 +4,12 @@ import React, { FC } from 'react';
 //! Styles
 import { Container, Day, Text, Number } from './styles';
 
+//! Types
+// type Types = {
+//     children: ReactElement,
+//     props: any
+// }
+
 export const Forecast: FC = () => {
     return (
         <Container>
@@ -14,21 +20,13 @@ export const Forecast: FC = () => {
             <Day className = 'cloudy'><Text>Пятница</Text>
                 <Number>123</Number>
             </Day>
-            <Day><Text>Пятница</Text>
+            <Day className = 'rainy'><Text>Пятница</Text>
                 <Number>123</Number>
             </Day>
-            <Day><Text>Пятница</Text>
+            <Day className = 'rainy'><Text>Пятница</Text>
                 <Number>123</Number>
             </Day>
-            <Day><Text>Пятница</Text>
-                <Number>123</Number>
-            </Day>
-            <Day><Text>Пятница</Text>
-                <Number>123</Number>
-            </Day>
-            <Day><Text>Пятница</Text>
-                <Number>123</Number>
-            </Day>
+
         </Container>
     );
 };

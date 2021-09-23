@@ -27,6 +27,7 @@ export const Day = styled.div`
     &.selected {
         background-color: #D9A9CE;
     }
+    
 
     /*IMAGES ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss*/
     &.cloudy::before {

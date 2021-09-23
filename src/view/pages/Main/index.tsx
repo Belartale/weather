@@ -19,7 +19,6 @@ const Main: FC = () => {
 
     return (
         <Container>
-            main
             <Filter />
             <Head/>
             <CurrentWether />
