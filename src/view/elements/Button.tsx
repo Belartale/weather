@@ -18,7 +18,7 @@ const Styled = styled.button<ButtonProps>`
     font-weight: 400;
     font-size: 16px;
     letter-spacing: 1px;
-    color: #fff;
+    color: ${({ theme }) => theme.text.primary};
     text-transform: uppercase;
 
     &:hover {

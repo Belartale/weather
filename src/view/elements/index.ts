@@ -5,3 +5,4 @@ export * from './Spinner';
 export * from './AdaptiveScroll';
 
 export * from './Checkbox';
+export * from './CardDay';

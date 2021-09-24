@@ -12,6 +12,7 @@ import { Container, MainText, Meta, Rainy, Humidity } from './styles';
 
 
 export const CurrentWether: FC = () => {
+    //todo вызвать катом. хук и пол. этот день из reducer !!!!!!!!!!!!!!
     return (
         <Container>
             <MainText>17</MainText>

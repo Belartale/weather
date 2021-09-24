@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import bg from '../assets/images/bg.png';
 
 export const AppContainer = styled.div`
-    /* height: 100vh; */
+    height: 100vh;
     width: 100vm;
     display: flex;
     flex-direction: column;

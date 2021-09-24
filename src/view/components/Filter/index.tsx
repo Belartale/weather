@@ -1,5 +1,5 @@
 //!Core
-import React, { FC, useState } from 'react';
+import React, { FC,  useState } from 'react';
 import { ContainerIndentBotton } from '../../containers/ContainerIndentBotton';
 
 //! Elements
@@ -8,43 +8,41 @@ import { Button, Checkbox, Input } from '../../elements';
 //! Styles
 import { ContainerForm } from './styles';
 
-//! Types
-// import * as Types from '../../../bus/filter/types';
-
-// type PropTypes = Types.Filter & {
-//     // isColor: boolean
-//     // updateHandler: Function
-//     // deleteHandler: Function
-// }
-
-// interface PropTypes extends Types.Todo {
-//     isColor: boolean
-//     updateHandler: Function
-//     deleteHandler: Function
-// }
-
 export const Filter: FC = () => {
-    const [ active, setActive  ] = useState(false);
-    const [ active2, setActive2  ] = useState(false);
-
-    const onSubmit = (event: any) => {
+    const onSubmitFilter = (event: any) => {
+        console.log(event.target.kindWeather.value);
         event.preventDefault();
+        const filter: object = {
+            kindWeather:    event.target.kindWeather.value,
+            minTemperature: event.target.minTemperature.value,
+            maxTemperature: event.target.maxTemperature.value,
+        };
+        //todo сет в reducer
     };
 
     return (
-        <ContainerForm>
+        <ContainerForm onSubmit = { onSubmitFilter }>
             <ContainerIndentBotton>
-                <div onClick = { () => { setActive(true); setActive2(false); } }>
-                    <Checkbox active = { active } >Облачно</Checkbox>
-                </div>
-            </ContainerIndentBotton>
-            <ContainerIndentBotton>
-                <div onClick = { () => { setActive2(true); setActive(false); } }>
-                    <Checkbox active = { active2 } >Солнечно</Checkbox>
-                </div>
+                <Input
+                    id = 'Облачно'
+                    name = 'kindWeather'
+                    title = 'Облачно'
+                    type = 'radio'
+                    value = 'cloudy'
+                />
             </ContainerIndentBotton>
             <ContainerIndentBotton>
                 <Input
+                    id = 'Солнечно'
+                    name = 'kindWeather'
+                    title = 'Солнечно'
+                    type = 'radio'
+                    value = 'sunny'
+                />
+            </ContainerIndentBotton>
+            <ContainerIndentBotton>
+                <Input
+                    id = 'Минимальная'
                     name = 'minTemperature'
                     title = 'Минимальная температура'
                     type = 'number'
@@ -52,12 +50,14 @@ export const Filter: FC = () => {
             </ContainerIndentBotton>
             <ContainerIndentBotton>
                 <Input
+                    id = 'Максимальная'
                     name = 'maxTemperature'
                     title = 'Максимальная температура'
                     type = 'number'
                 />
             </ContainerIndentBotton>
-            <Button onClick = { onSubmit }>Отфильтровать</Button>
+            <Button >Отфильтровать
+            </Button>
         </ContainerForm>
     );
 };

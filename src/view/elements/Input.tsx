@@ -15,6 +15,7 @@ const StyledLabel = styled.label`
     text-transform: uppercase;
     color: ${({ theme }) => theme.input.primary};
     margin-right: 14px;
+    cursor: pointer;
 `;
 
 const StyledInput = styled.input<StyledInputProps>`
@@ -30,8 +31,39 @@ const StyledInput = styled.input<StyledInputProps>`
     font-weight: 400;
     font-size: 16px;
     text-align: center;
-`;
 
+    &[type=radio] {
+        visibility: hidden;
+        position: relative;
+        cursor: pointer;
+        width: 25px;
+    }
+    &[type=radio]:before {
+        visibility: visible;
+        content: "";
+        display: block;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        top: -7px;
+        left: 0px;
+        border: 1px solid ${({ theme }) => theme.input.primary};
+        border-radius: 3px;
+        background-color: transparent;
+    }
+    &[type=radio]:checked:after {
+        visibility: visible;
+        content: "✓";
+        display: block;
+        width: 5px;
+        height: 10px;
+        position: absolute;
+        top: -4px;
+        left: 5px;
+        font-size: 16px;
+        color: ${({ theme }) => theme.input.primary};
+}
+`;
 
 //! Types
 interface StyledInputProps {
@@ -43,20 +75,23 @@ export interface InputProps extends
     DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 {
     // use React.Ref instead of React.LegacyRef to prevent type incompatibility errors with styled-components types
-    ref?: Ref<HTMLInputElement>;
+    ref?: Ref<any>;
     type: string;
     title: string;
     name: string;
+    id: string;
+    value?: string;
 }
 
-export const Input: FC<InputProps> = ({ style, type, title, name }) => {
+export const Input: FC<InputProps> = ({ id, style, type, title, name, value }) => {
     return (
         <InputContainer style = { style }>
-            <StyledLabel htmlFor = { name }>{title}</StyledLabel>
+            <StyledLabel htmlFor = { id }>{title}</StyledLabel>
             <StyledInput
-                id = { name }
+                id = { id }
                 name = { name }
                 type = { type }
+                value = { value }
             />
         </InputContainer>
     );

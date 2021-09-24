@@ -5,16 +5,14 @@ export const defaultTheme = {
     name:   'defaultTheme',
     ...breakpoints,
     button: {
-        primary: '#C584BC',
-        // secondary: '#FFEE58',
-        // error:     'red',
-        hover:   '#966590',
-        text:    '#fff',
+        primary:      '#C584BC',
+        hover:        '#966590',
+        hoverPrimary: '#D9A9CE',
+        text:         '#fff',
     },
     day: {
         primary:   '#C486BB',
         secondary: '#D9A9CE',
-        three:     'red',
         border:    '#fff',
     },
     input: {
@@ -22,7 +20,6 @@ export const defaultTheme = {
         secondary: '#FFEE58',
         error:     'red',
     },
-
     text: {
         primary: '#fff',
     },
