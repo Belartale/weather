@@ -11,7 +11,7 @@ import {
 } from './workers';
 
 function* watchFetchWeathers(): SagaIterator {
-    yield takeEvery(types.FETCH_WEATHERS_ASYNC, fetchWeathers); //? добавляем effects, а второй аргумент мы fetch
+    yield takeEvery(types.FETCH_WEATHERS_ASYNC, fetchWeathers); //? доб. effects, а второй аргум мы fetch
 }
 
 export function* watchWeathers(): SagaIterator {

@@ -1,14 +1,14 @@
-// Tools
+//! Tools
 import { ControlledError } from '../../../../tools/utils';
 
-// Constants
-import { API_URL } from '../../../../init/constants';
+//! Constants
+import { API_URL_WEATHERS } from '../../../../init/constants';
 
-// Types
+//! Types
 import * as types from '../../types';
 
 export const fetchWeathers: () => Promise<types.WeathersState> = async () => {
-    const response = await fetch(`${API_URL}/messages`, {
+    const response = await fetch(`${API_URL_WEATHERS}/forecast?limit=30`, {
         method:  'GET',
         headers: {
             'Content-Type': 'application/json',

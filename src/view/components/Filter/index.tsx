@@ -1,9 +1,10 @@
 //! Core
-import React, { FC,  useState } from 'react';
+import React, { FC } from 'react';
+import { useWeather } from '../../../bus/weathers';
 import { ContainerIndentBotton } from '../../containers/ContainerIndentBotton';
 
 //! Elements
-import { Button, Checkbox, Input } from '../../elements';
+import { Button, Input } from '../../elements';
 
 //! Styles
 import { ContainerForm } from './styles';
@@ -19,6 +20,7 @@ export const Filter: FC = () => {
         };
         //todo сет в reducer
     };
+
 
     return (
         <ContainerForm onSubmit = { onSubmitFilter }>

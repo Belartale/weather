@@ -6,3 +6,4 @@ export const setWeathers: types.SetWeathersContract = (...args) => {
 
     return action.payload;
 };
+

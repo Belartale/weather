@@ -18,7 +18,7 @@ import { fetchWeatherActionAsync } from './saga/actions';
 export const useWeather = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => ({
-        messages: state.messages,
+        // messages: state.messages,
         loading:  state.togglers.isMessagesFetching,
         weathers: state.weathers,
     }));

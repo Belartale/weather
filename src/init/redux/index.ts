@@ -1,16 +1,18 @@
-// Core
+//! Core
 import { configureStore } from '@reduxjs/toolkit';
 
-// Reducers
+//! Reducers
 import togglers from '../../bus/client/togglers';
 import errors from '../../bus/client/errors';
 import counter from '../../bus/counter/slice';
 import messages from '../../bus/messages/slice';
 
-// Middleware
+import weathers from '../../bus/weathers/slice';
+
+//! Middleware
 import { middleware, sagaMiddleware } from './middleware';
 
-// Sagas
+//! Sagas
 import { rootSaga } from './rootSaga';
 
 export const store = configureStore({
@@ -19,6 +21,7 @@ export const store = configureStore({
         errors,
         counter,
         messages,
+        weathers,
     },
     middleware,
     devTools: process.env.NODE_ENV !== 'production',

@@ -1,7 +1,7 @@
 // Instruments
 import * as types from './types';
 
-export const fetchMessagesActionAsync: types.FetchWeathersContract = () => ({
+export const fetchWeatherActionAsync: types.FetchWeathersContract = () => ({
     type: types.FETCH_WEATHERS_ASYNC,
 });
 
