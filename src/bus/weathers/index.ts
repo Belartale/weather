@@ -9,7 +9,7 @@ import { useSelector } from '../../tools/hooks';
 import { fetchWeatherActionAsync } from './saga/actions';
 
 //! Types
-// import { MessagesState } from './types';
+import { Weather } from './types';
 
 //! Interfaces
 // import { messagesActions } from './slice';
@@ -20,7 +20,7 @@ export const useWeathers = () => {
     const selector = useSelector((state) => ({
         loading:        state.togglers.isWeathersFetching,
         weathers:       state.weathers.data,
-        currentWeather: state.weathers.currentDay,
+        currentWeather: state.weathers.currentWeather,
     }));
 
     useEffect(() => {
@@ -29,5 +29,6 @@ export const useWeathers = () => {
 
     return {
         ...selector,
+        setCurrentWeather: (payload: Weather) => dispatch(),
     };
 };

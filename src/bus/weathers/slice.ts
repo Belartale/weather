@@ -8,7 +8,7 @@ import { WeathersState } from './types';
 import * as reducers from './reducers';
 
 const initialState: WeathersState = { data:       [],
-    currentDay: {
+    currentWeather: {
         id:               '',
         rain_probability: 0,
         humidity:         0,

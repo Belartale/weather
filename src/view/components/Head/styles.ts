@@ -1,8 +1,15 @@
 //! Core
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 //! Images
-import image from '../../../assets/images/weather-icon-cloudy.png';
+import ImageCloudy from '../../../assets/images/weather-icon-cloudy.png';
+import ImageRainy from '../../../assets/images/weather-icon-rainy.png';
+import ImageSunny from '../../../assets/images/weather-icon-sunny.png';
+
+//! Types
+interface TypeIconStyled {
+    typeImage: string;
+}
 
 //! Styles
 export const HeadStyled = styled.div`
@@ -11,13 +18,30 @@ export const HeadStyled = styled.div`
     margin-top: 60px;
     margin-bottom: 83px;
 `;
-export const IconStyled = styled.div`
+export const IconStyled = styled.div<TypeIconStyled>`
     margin-right: 30px;
     background-size: contain;
     background-repeat: no-repeat;
     height: 88px;
     width: 114px;
-    background-image: url(${image});
+
+    ${({ typeImage }) => typeImage === 'cloudy' ? css`
+    & {
+        background-image: url(${ImageCloudy});
+    }
+    ` : ''}
+
+    ${({ typeImage }) => typeImage === 'rainy' ? css`
+    & {
+        background-image: url(${ImageRainy});
+    }
+    ` : ''}
+
+    ${({ typeImage }) => typeImage === 'sunny' ? css`
+    & {
+        background-image: url(${ImageSunny});
+    }
+    ` : ''}
 `;
 export const CurrentDateStyled = styled.div`
     display: flex;

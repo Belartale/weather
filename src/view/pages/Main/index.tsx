@@ -4,7 +4,6 @@ import React, { FC } from 'react';
 //! Components
 import { CurrentWether, ErrorBoundary, Filter, Forecast, Head } from '../../components';
 
-
 //! Styles
 import { Container } from './styles';
 

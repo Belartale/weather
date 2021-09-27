@@ -10,7 +10,7 @@ export type Weather = {
     temperature: number,
     type: string
 };
-export type WeathersState = { data: Array<Weather>, currentDay: Weather }
+export type WeathersState = { data: Array<Weather>, currentWeather: Weather }
 
 //! Contracts
 export type SetWeathersContract = CaseReducer<WeathersState, PayloadAction<WeathersState>>
