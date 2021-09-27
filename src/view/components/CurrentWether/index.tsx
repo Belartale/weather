@@ -1,6 +1,5 @@
 //!Core
-import React, { FC, useState } from 'react';
-import { ContainerIndentBotton } from '../../containers/ContainerIndentBotton';
+import React, { FC, useEffect, useState } from 'react';
 
 //! Elements
 // import { Button, Checkbox, Input } from '../../elements';
@@ -8,17 +7,33 @@ import { ContainerIndentBotton } from '../../containers/ContainerIndentBotton';
 //! Styles
 import { Container, MainText, Meta, Rainy, Humidity } from './styles';
 
-//! Types
-
+//! Hooks
+import { useWeathers } from '../../../bus/weathers';
 
 export const CurrentWether: FC = () => {
     //todo вызвать катом. хук и пол. этот день из reducer !!!!!!!!!!!!!!
+    const { currentWeather }: any = useWeathers();
+    const [ currentDay, setCurrentDay ]: any = useState({
+        id:               '',
+        rain_probability: 0,
+        humidity:         0,
+        day:              0,
+        temperature:      0,
+        type:             '',
+    });
+
+
+    useEffect(() => {
+        setCurrentDay(currentWeather);
+    }, [ currentWeather ]);
+
+
     return (
         <Container>
-            <MainText>17</MainText>
+            <MainText>{currentDay.temperature}</MainText>
             <Meta>
-                <Rainy>%35</Rainy>
-                <Humidity>%72</Humidity>
+                <Rainy>%{currentDay.rain_probability}</Rainy>
+                <Humidity>%{currentDay.humidity}</Humidity>
             </Meta>
         </Container>
     );

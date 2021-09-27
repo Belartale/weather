@@ -15,12 +15,12 @@ import { fetchWeatherActionAsync } from './saga/actions';
 // import { messagesActions } from './slice';
 
 //! Hooks
-export const useWeather = () => {
+export const useWeathers = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => ({
-        // messages: state.messages,
-        loading:  state.togglers.isMessagesFetching,
-        weathers: state.weathers,
+        loading:        state.togglers.isWeathersFetching,
+        weathers:       state.weathers.data,
+        currentWeather: state.weathers.currentDay,
     }));
 
     useEffect(() => {

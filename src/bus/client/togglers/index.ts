@@ -1,8 +1,8 @@
-// Core
+//! Core
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-// Tools
+//! Tools
 import { useSelector } from '../../../tools/hooks';
 
 const initialState = {
@@ -12,11 +12,11 @@ const initialState = {
     isWeathersFetching: false,
 };
 
-// Types
+//! Types
 export type TogglersKeys = keyof typeof initialState;
 type Options = { type: TogglersKeys, value: boolean };
 
-// Slice
+//! Slice
 export const toggrersSlice = createSlice({
     name:     'togglers',
     initialState,
@@ -29,7 +29,7 @@ export const toggrersSlice = createSlice({
     },
 });
 
-// Interfaces
+//! Interfaces
 const toggrersActions = toggrersSlice.actions;
 export default toggrersSlice.reducer;
 

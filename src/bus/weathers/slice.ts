@@ -1,13 +1,21 @@
-// Core
+//! Core
 import { createSlice } from '@reduxjs/toolkit';
 
-// Types
+//! Types
 import { WeathersState } from './types';
 
-// Reducers
+//! Reducers
 import * as reducers from './reducers';
 
-const initialState: WeathersState = [];
+const initialState: WeathersState = { data:       [],
+    currentDay: {
+        id:               '',
+        rain_probability: 0,
+        humidity:         0,
+        day:              0,
+        temperature:      0,
+        type:             '',
+    }};
 
 export const weathersSlice = createSlice({
     name: 'weathers',

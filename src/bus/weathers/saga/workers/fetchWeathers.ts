@@ -1,13 +1,13 @@
-// Types
+//! Types
 import { WeathersState } from '../../types';
 
-// Sync actions
+//! Sync actions
 import { weathersActions } from '../../slice';
 
-// Api
+//! API
 import * as API from '../api';
 
-// Instruments
+//! Instruments
 import { IControlledError, makeRequest } from '../../../../tools/utils';
 
 export function* fetchWeathers() {
@@ -21,8 +21,4 @@ export function* fetchWeathers() {
     if (combineResult?.name === 'ControlledError') {
         console.log(combineResult.errorId);
     }
-
-    // if (combineResult.length) {
-    //     console.log(combineResult);
-    // }
 }

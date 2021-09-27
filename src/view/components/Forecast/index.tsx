@@ -1,16 +1,20 @@
 //!Core
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { CardDay } from '../../elements';
 import moment from 'moment';
 
 //! Styles
 import { Container } from './styles';
+import { useWeathers } from '../../../bus/weathers';
 
 //! Types
+import * as Types from '../../../bus/weathers/types';
+import { useTogglersRedux } from '../../../bus/client/togglers';
 // type Types = {
 //     children: ReactElement,
 //     props: any
 // }
+
 
 const arr: Array<any> = [
     {
@@ -71,20 +75,34 @@ const arr: Array<any> = [
     },
 ];
 
+
 export const Forecast: FC = () => {
+    const { weathers, loading }: any = useWeathers();
+    const [ cardsWeathers, setCardsWeathers ] = useState([]);
+    // console.log(weathers);
+    // console.log(loading);
+
+    useEffect(() => {
+        setCardsWeathers(weathers);
+    }, [ weathers ]);
+
     //todo вызвать каст. хук и .map() !!!!!!!!!!!!!!!!!!!!
     return (
         <Container>
-            {arr.map((element, index) => {
-                return (
-                    <CardDay
-                        key = { index }
-                        number = { element.temperature }
-                        text = { moment(element.day).format('dddd') }
-                        typeDay = { element.type }
-                    />
-                );
-            })}
+
+            { !loading
+                ? cardsWeathers.slice(0, 7).map((element: Types.Weather) => {
+                    return (
+                        <CardDay
+                            key = { element.id }
+                            number = { element.temperature }
+                            text = { moment(element.day).format('dddd') }
+                            typeDay = { element.type }
+                        />
+                    );
+                })
+                : 'Loading...'
+            }
         </Container>
     );
 };
