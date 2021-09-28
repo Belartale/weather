@@ -31,6 +31,7 @@ export const useWeathers = () => {
 
     return {
         ...selector,
+        fetch:               () => dispatch(fetchWeatherActionAsync()),
         setCurrentWeather:   (payload: types.Weather) => dispatch(weathersActions.setCurrentWeatherReducer(payload)),
         setFilteredWeathers: (payload: types.ArrayWeathers) => dispatch(weathersActions.setFilteredWeathers(payload)),
     };

@@ -19,43 +19,20 @@ export const useFilter = () => {
     }));
 
 
-    const filteredWeathers = params.weathers.filter(({ temperature }) => {
-        const { minTemperature, maxTemperature } = params.filter;
-
-        if (minTemperature === null || maxTemperature === null) {
-            return true;
+    const newFilteredData = params.weathers.filter((day) => {
+        if ((params.filter.kindWeather && day.type !== params.filter.kindWeather)
+            || (params.filter.minTemperature && day.temperature < Number(params.filter.minTemperature))
+            || (params.filter.maxTemperature && day.temperature > Number(params.filter.maxTemperature))
+        ) {
+            return false;
         }
 
-
-        const isMinTemperatureValid = temperature >= minTemperature;
-        const isMaxTemperatureValid = temperature <= maxTemperature;
-        if (minTemperature && maxTemperature) {
-            return isMaxTemperatureValid && isMinTemperatureValid;
-        } else if (minTemperature) {
-            return isMinTemperatureValid;
-        } else if (maxTemperature) {
-            return isMaxTemperatureValid;
-        }
-
-        return false;
+        return true;
     });
-
-    // console.log(filteredWeathers);
-
-
-    // const filteredWeathers = () => {
-    //     const { minTemperature, maxTemperature }: any = params.filter;
-
-    //     return lodash.sortBy(params.weathers, [
-    //         (o) => {
-    //             return o.temperature > minTemperature && o.temperature < maxTemperature;
-    //         },
-    //     ]);
-    // };
-
+    //.slice(0, 7)
 
     return {
-        filteredWeathers: () => filteredWeathers,
+        filteredWeathers: () => newFilteredData,
         setFilter:        (payload: Filter) => void dispatch(filterActions.setFilter(payload)),
     };
 };

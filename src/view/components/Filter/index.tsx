@@ -1,5 +1,6 @@
 //! Core
 import React, { FC, useEffect, useState } from 'react';
+import { EventChannel } from 'redux-saga';
 
 //! Hooks
 import { useFilter } from '../../../bus/client/filter';
@@ -26,7 +27,9 @@ const InitialState = {
 
 export const Filter: FC = () => {
     const { filteredWeathers, setFilter } = useFilter();
-    const { weathers, setFilteredWeathers } = useWeathers();
+    const { weathers, setFilteredWeathers, fetch } = useWeathers();
+
+    const [ isReset, setIsReset ] = useState(false);
 
     const [ form, handleChange, setInitialForm, resetForm  ] = useForm<typeof InitialState>(InitialState);
     const [ isCloseBtn, setIsCloseBtn ] = useState(true);
@@ -36,11 +39,24 @@ export const Filter: FC = () => {
     }
 
     const onSubmitFilter = (event: any) => {
-        event.preventDefault();
+        // event.preventDefault();
 
         setFilter(form);
 
         setFilteredWeathers(filteredWeathers());
+        setIsReset(true);
+        console.log('some text');
+    };
+
+    const onResetFilter = (event: any) => {
+        // event.preventDefault();
+
+        setFilter(form);
+
+        resetForm();
+        setInitialForm(InitialState);
+        fetch();
+        setIsReset(false);
     };
 
     useEffect(() => {
@@ -53,8 +69,7 @@ export const Filter: FC = () => {
 
 
     return (
-        // <ContainerForm onSubmit = { (event) => onSubmitFilter(event) }>
-        <ContainerForm>
+        <ContainerForm onSubmit = { (event) => event.preventDefault() }>
             <ContainerIndentBotton>
                 <Input
                     id = 'Облачно'
@@ -95,10 +110,15 @@ export const Filter: FC = () => {
                     onChange = { (event: any) => handleChange(event, true)  }
                 />
             </ContainerIndentBotton>
-            <Button
-                disabled = { isCloseBtn }
-                onClick = { onSubmitFilter } >Отфильтровать
-            </Button>
+            { !isReset
+                ? <Button
+                    disabled = { isCloseBtn }
+                    onClick = { onSubmitFilter } >Отфильтровать
+                  </Button>
+                : <Button
+                    onClick = { onResetFilter } >Сброс
+                  </Button>
+            }
         </ContainerForm>
     );
 };
