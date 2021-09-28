@@ -16,6 +16,7 @@ interface CardDayInterface {
     text: string;
     number: any;
     typeDay: string;
+    onClick: any
 }
 
 

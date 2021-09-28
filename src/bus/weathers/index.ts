@@ -6,10 +6,11 @@ import { useEffect } from 'react';
 import { useSelector } from '../../tools/hooks';
 
 //! Saga actions
-import { fetchWeatherActionAsync } from './saga/actions';
+import { fetchWeatherActionAsync, setCurrentWeatherActionAsync } from './saga/actions';
 
 //! Types
 import { Weather } from './types';
+import { weathersActions } from './slice';
 
 //! Interfaces
 // import { messagesActions } from './slice';
@@ -29,6 +30,6 @@ export const useWeathers = () => {
 
     return {
         ...selector,
-        setCurrentWeather: (payload: Weather) => dispatch(),
+        setCurrentWeather: (payload: Weather) => dispatch(weathersActions.setCurrentWeatherReducer(payload)),
     };
 };

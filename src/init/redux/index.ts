@@ -8,6 +8,7 @@ import counter from '../../bus/counter/slice';
 import messages from '../../bus/messages/slice';
 
 import weathers from '../../bus/weathers/slice';
+import filter from '../../bus/filter/slice';
 
 //! Middleware
 import { middleware, sagaMiddleware } from './middleware';
@@ -22,6 +23,7 @@ export const store = configureStore({
         counter,
         messages,
         weathers,
+        filter,
     },
     middleware,
     devTools: process.env.NODE_ENV !== 'production',

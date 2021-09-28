@@ -12,7 +12,7 @@ import { ContainerForm } from './styles';
 
 export const Filter: FC = () => {
     const onSubmitFilter = (event: any) => {
-        console.log(event.target.kindWeather.value);
+        // console.log(event.target.kindWeather.value);
         event.preventDefault();
         const filter: object = {
             kindWeather:    event.target.kindWeather.value,

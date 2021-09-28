@@ -77,10 +77,8 @@ const arr: Array<any> = [
 
 
 export const Forecast: FC = () => {
-    const { weathers, loading }: any = useWeathers();
-    const [ cardsWeathers, setCardsWeathers ] = useState([]);
-    // console.log(weathers);
-    // console.log(loading);
+    const { weathers, loading, setCurrentWeather }: any = useWeathers();
+    const [ cardsWeathers, setCardsWeathers ]: [Array<Types.Weather>, any] = useState([]);
 
     useEffect(() => {
         setCardsWeathers(weathers);
@@ -98,6 +96,7 @@ export const Forecast: FC = () => {
                             number = { element.temperature }
                             text = { moment(element.day).format('dddd') }
                             typeDay = { element.type }
+                            onClick = { () => setCurrentWeather(element) }
                         />
                     );
                 })
