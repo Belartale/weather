@@ -80,10 +80,11 @@ export interface InputProps extends
     title: string;
     name: string;
     id: string;
-    value?: string;
+    value?: any;
+    onChange?: any
 }
 
-export const Input: FC<InputProps> = ({ id, style, type, title, name, value }) => {
+export const Input: FC<InputProps> = ({ id, style, type, title, name, value, onChange }) => {
     return (
         <InputContainer style = { style }>
             <StyledLabel htmlFor = { id }>{title}</StyledLabel>
@@ -92,6 +93,7 @@ export const Input: FC<InputProps> = ({ id, style, type, title, name, value }) =
                 name = { name }
                 type = { type }
                 value = { value }
+                onChange = { onChange }
             />
         </InputContainer>
     );

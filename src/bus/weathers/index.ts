@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useSelector } from '../../tools/hooks';
 
 //! Saga actions
-import { fetchWeatherActionAsync, setCurrentWeatherActionAsync } from './saga/actions';
+import { fetchWeatherActionAsync } from './saga/actions';
 
 //! Types
 import { Weather } from './types';

@@ -1,11 +1,12 @@
 // Core
 import React, { FC, DetailedHTMLProps, Ref } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ButtonProps extends DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     // use React.Ref instead of React.LegacyRef to prevent type incompatibility errors with styled-components types
     ref?: Ref<HTMLButtonElement>;
     active?: boolean;
+    disabled?: boolean
 }
 
 // Styles
@@ -21,16 +22,23 @@ const Styled = styled.button<ButtonProps>`
     color: ${({ theme }) => theme.text.primary};
     text-transform: uppercase;
 
-    &:hover {
-        cursor: pointer;
-        background-color: ${({ theme }) => theme.button.hover};;
-    }
+    
+    ${({ disabled }) => disabled === true ? css`
+        opacity: .3;
+    `
+        : disabled === false ? css`
+        &:hover {
+            cursor: pointer;
+            background-color: ${({ theme }) => theme.button.hover};;
+        }
+    ` : '' }
 `;
 
-export const Button: FC<ButtonProps> = ({ children, ...otherProps  }) => {
+export const Button: FC<ButtonProps> = ({ children, disabled, ...otherProps  }) => {
     return (
         <Styled
-            { ...otherProps }>
+            { ...otherProps }
+            disabled = { disabled }>
             {children}
         </Styled>
     );
