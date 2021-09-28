@@ -8,7 +8,7 @@ import counter from '../../bus/counter/slice';
 import messages from '../../bus/messages/slice';
 
 import weathers from '../../bus/weathers/slice';
-import filter from '../../bus/filter/slice';
+import filter from '../../bus/client/filter/slice';
 
 //! Middleware
 import { middleware, sagaMiddleware } from './middleware';

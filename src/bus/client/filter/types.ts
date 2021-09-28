@@ -12,3 +12,10 @@ export type FilterState = Filter;
 //! Contracts
 export type SetFilterContract = CaseReducer<FilterState, PayloadAction<FilterState>>
 
+//! Actions
+export const SET_FILTER = 'SET_FILTER';
+export type SetFilterActionType = {
+    type: typeof SET_FILTER;
+    payload: Filter;
+};
+export type SetFilterContractAction = (payload: Filter) => SetFilterActionType;
