@@ -15,7 +15,11 @@ export const Forecast: FC = () => {
     const [ cardsWeathers, setCardsWeathers ]: [Array<Types.Weather>, Function] = useState([]);
 
     useEffect(() => {
-        setCardsWeathers(weathers);
+        (async () => {
+            await setCardsWeathers(weathers);
+            // console.log('22222222222222');
+            // console.log(cardsWeathers);
+        })();
     }, [ weathers ]);
 
     return (

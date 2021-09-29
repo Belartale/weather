@@ -12,9 +12,6 @@ import { fetchWeatherActionAsync } from './saga/actions';
 import * as types from './types';
 import { weathersActions } from './slice';
 
-//! Interfaces
-// import { messagesActions } from './slice';
-
 //! Hooks
 export const useWeathers = () => {
     const dispatch = useDispatch();

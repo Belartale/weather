@@ -34,27 +34,37 @@ export const Filter: FC = () => {
     const [ form, handleChange, setInitialForm, resetForm  ] = useForm<typeof InitialState>(InitialState);
     const [ isCloseBtn, setIsCloseBtn ] = useState(true);
 
-    if (form.kindWeather === 'string') {
-        console.log('some text');
-    }
+    // useEffect(() => ,)
+
 
     const onSubmitFilter = (event: any) => {
         // event.preventDefault();
 
-        setFilter(form);
+        // console.log(form);
 
-        setFilteredWeathers(filteredWeathers());
+        setFilter(form);
+        const adfd = filteredWeathers;
+
+        setFilteredWeathers(adfd);
+        console.log(filteredWeathers);
         setIsReset(true);
-        console.log('some text');
     };
 
     const onResetFilter = (event: any) => {
         // event.preventDefault();
 
-        setFilter(form);
+        setFilter({
+            kindWeather:    null,
+            minTemperature: null,
+            maxTemperature: null,
+        });
 
+        setInitialForm({
+            kindWeather:    null,
+            minTemperature: null,
+            maxTemperature: null,
+        });
         resetForm();
-        setInitialForm(InitialState);
         fetch();
         setIsReset(false);
     };
@@ -112,13 +122,25 @@ export const Filter: FC = () => {
             </ContainerIndentBotton>
             { !isReset
                 ? <Button
-                    disabled = { isCloseBtn }
-                    onClick = { onSubmitFilter } >Отфильтровать
-                  </Button>
+                        disabled = { isCloseBtn }
+                        onClick = { onSubmitFilter } >Отфильтровать
+                </Button>
                 : <Button
-                    onClick = { onResetFilter } >Сброс
-                  </Button>
+                        onClick = { onResetFilter } >Сброс
+                </Button>
             }
+
+
+            {/* <Button
+                disabled = { isCloseBtn }
+                onClick = { onSubmitFilter } >Отфильтровать
+            </Button>
+
+
+            <Button
+                onClick = { onResetFilter } >Сброс
+            </Button> */}
+
         </ContainerForm>
     );
 };
