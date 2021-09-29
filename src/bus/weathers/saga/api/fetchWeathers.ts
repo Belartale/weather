@@ -1,13 +1,14 @@
 //! Tools
-import { ControlledError } from '../../../../tools/utils';
+// import { ControlledError } from '../../../../tools/utils';
 
 //! Constants
 import { API_URL_WEATHERS } from '../../../../init/constants';
 
 //! Types
 import * as types from '../../types';
+import { FetchWeathers } from './types';
 
-export const fetchWeathers: () => Promise<types.ArrayWeathers> = async () => {
+export const fetchWeathers: FetchWeathers = async () => {
     const response = await fetch(`${API_URL_WEATHERS}/forecast?limit=30`, {
         method:  'GET',
         headers: {
@@ -16,13 +17,7 @@ export const fetchWeathers: () => Promise<types.ArrayWeathers> = async () => {
     });
 
     if (response.status !== 200) {
-        throw new ControlledError({
-            message:    'fetchWeathers failed',
-            statusCode: response.status,
-            data:       {
-                test: '123',
-            },
-        });
+        throw new Error('fetchWeathers failed');
     }
 
     const { data }: { data: types.ArrayWeathers } = await response.json();

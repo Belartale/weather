@@ -1,29 +1,42 @@
 //! Core
-import { put } from 'redux-saga/effects';
+import { call, put/* , select */ } from 'redux-saga/effects';
+
+
+//! Redux
+import { weathersActions } from '../../slice';
+import { togglerCreatorAction } from '../../../client/togglers';
+
+//! Tools
+import * as API from '../api';
+// import { makeRequest } from '../../../../tools/utils';
 
 //! Types
-import { ArrayWeathers } from '../../types';
+// import { FetchWeathersActionAsync } from '../types';
+import { ArrayWeathers as Days } from '../../types';
+// import { RootState } from '../../../../init/redux';
 
-//! Sync actions
-import { weathersActions } from '../../slice';
+export function* fetchWeathers(/* { payload }: FetchWeathersActionAsync */) {
+    // console.log('🚀payload', payload);
+    try {
+        yield put(togglerCreatorAction({
+            type:  'isWeathersFetching',
+            value: true,
+        }));
 
-//! API
-import * as API from '../api';
+        // const togglers = yield select<(store: RootState) => RootState>(store) => store.togglers;
 
-//! Instruments
-import { IControlledError, makeRequest } from '../../../../tools/utils';
+        // console.log('🚀togglers', togglers);
 
-export function* fetchWeathers() {
-    const combineResult: IControlledError & ArrayWeathers = yield makeRequest<ArrayWeathers>({
-        fetcher:          API.fetchWeathers,
-        togglerType:      'isWeathersFetching',
-        fill:             weathersActions.setWeathers,
-        isControlledMode: true,
-    });
+        const result: Days = yield call(API.fetchWeathers);
 
-    if (combineResult?.name === 'ControlledError') {
-        console.log(combineResult.errorId);
-    } else {
-        yield put(weathersActions.setCurrentWeatherReducer(combineResult[ 0 ]));
+        yield put(weathersActions.setWeathers(result));
+        yield put(weathersActions.setCurrentWeatherReducer(result[ 0 ]));
+    } catch (error) {
+        console.log('🚀error', error);
+    } finally {
+        yield put(togglerCreatorAction({
+            type:  'isWeathersFetching',
+            value: false,
+        }));
     }
 }

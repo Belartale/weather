@@ -13,7 +13,7 @@ import { useWeathers } from '../../../bus/weathers';
 import { HeadStyled, IconStyled, CurrentDateStyled, TextStyled, DateStyled } from './styles';
 
 export const Head: FC = () => {
-    const { loading, currentWeather } = useWeathers();
+    const { loading, currentWeather } = useWeathers({});
 
     if (loading) {
         return <Spinner />;

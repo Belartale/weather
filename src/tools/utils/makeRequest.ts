@@ -12,7 +12,7 @@ import { IControlledError } from './controlledError';
 type OptionsType<T> = {
     fetcher: (...args: any) => Promise<T>;
     togglerType?: TogglersKeys;
-    fill?: (payload: T) => {
+    succesAction?: (payload: T) => {
         type: string;
         payload: T;
     };
@@ -25,7 +25,7 @@ export function* makeRequest<T>(options: OptionsType<T>) {
     const {
         fetcher,
         togglerType,
-        fill,
+        succesAction,
         successSideEffect,
         errorSideEffect,
         isControlledMode,
@@ -42,12 +42,12 @@ export function* makeRequest<T>(options: OptionsType<T>) {
 
         const result: T = yield call(fetcher);
 
-        if (fill) {
-            yield put(fill(result));
+        if (succesAction) {
+            yield put(succesAction(result));
         }
 
         if (successSideEffect) {
-            yield put(successSideEffect());
+            yield successSideEffect();
         }
 
         return result;

@@ -12,7 +12,7 @@ import { useWeathers } from '../../../bus/weathers';
 import { Container, MainText, Meta, Rainy, Humidity } from './styles';
 
 export const CurrentWether: FC = () => {
-    const { loading, currentWeather } = useWeathers();
+    const { loading, currentWeather } = useWeathers({});
 
     if (loading) {
         return <Spinner />;

@@ -15,7 +15,7 @@ export const Forecast: FC = () => {
     const {
         weathers, loading,
         currentWeather, setCurrentWeather,
-    } = useWeathers();
+    } = useWeathers({});
 
     if (loading) {
         return <Spinner />;

@@ -35,3 +35,5 @@ render(<Root />, document.getElementById('app'));
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     registerServiceWorker();
 }
+
+export { reduxStore };

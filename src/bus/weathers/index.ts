@@ -12,11 +12,9 @@ import { fetchWeatherActionAsync } from './saga/actions';
 import * as types from './types';
 import { weathersActions } from './slice';
 
-type Options = {
-    isFetchingEnable?: boolean
-} | void
+type Options = { isFetchingEnable?: true }
 
-export const useWeathers = ({ isFetchingEnable = false }: Options) => {
+export const useWeathers = (options: Options) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => ({
         loading:        state.togglers.isWeathersFetching,
@@ -25,14 +23,14 @@ export const useWeathers = ({ isFetchingEnable = false }: Options) => {
     }));
 
     useEffect(() => {
-        if (isFetchingEnable) {
-            dispatch(fetchWeatherActionAsync());
+        if (options?.isFetchingEnable) {
+            dispatch(fetchWeatherActionAsync(1213));
         }
     }, []);
 
     return {
         ...selector,
-        fetch:             () => void dispatch(fetchWeatherActionAsync()),
+        fetch:             () => void dispatch(fetchWeatherActionAsync(3)),
         setCurrentWeather: (payload: types.Weather) => void dispatch(
             weathersActions.setCurrentWeatherReducer(payload),
         ),
