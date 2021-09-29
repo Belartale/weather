@@ -7,7 +7,7 @@ import { WeathersState } from './types';
 //! Reducers
 import * as reducers from './reducers';
 
-const initialState: WeathersState = { data:           [],
+export const initialState: WeathersState = { data:           [],
     currentWeather: {
         id:               '',
         rain_probability: 0,
@@ -23,5 +23,5 @@ export const weathersSlice = createSlice({
     reducers,
 });
 
-export const weathersActions: any = weathersSlice.actions;
+export const weathersActions = weathersSlice.actions;
 export default weathersSlice.reducer;

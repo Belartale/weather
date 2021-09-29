@@ -2,6 +2,7 @@
 import moment from 'moment';
 import React, { FC } from 'react';
 import { useWeathers } from '../../../bus/weathers';
+import { Spinner } from '../../elements';
 
 //! Styles
 import { HeadStyled, IconStyled, CurrentDateStyled, TextStyled, DateStyled } from './styles';
@@ -19,8 +20,8 @@ export const Head: FC = () => {
                             <TextStyled>{moment(currentWeather.day).format('dddd') }</TextStyled>
                             <DateStyled>{moment(currentWeather.day).format('LL')} </DateStyled>
                         </CurrentDateStyled>
-                    </HeadStyled>
-                    : 'Loading...'
+                      </HeadStyled>
+                    : <Spinner/>
             }
         </>
     );

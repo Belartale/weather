@@ -15,7 +15,7 @@ export const Routes: FC = () => {
     // const { togglersRedux: { isLoggedIn }} = useTogglersRedux();
 
     return (
-        <Suspense fallback = { <Spinner /> }>
+        <Suspense fallback = { null }>
             <Private />
             {/* {
                 isLoggedIn

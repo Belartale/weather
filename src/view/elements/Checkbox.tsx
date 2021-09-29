@@ -20,7 +20,7 @@ const CheckboxStyled = styled.span<CheckboxStyledInterface>`
     font-weight: 400;
     font-size: 16px;
     text-transform: uppercase;
-    color: #fff;
+    color: ${({ theme }) => theme.text.primary};
     display: inline-flex;
     align-items: center;
 
@@ -33,7 +33,7 @@ const CheckboxStyled = styled.span<CheckboxStyledInterface>`
         display: inline-block;
         width: 25px;
         height: 25px;
-        border: solid 1px #fff;
+        border: solid 1px ${({ theme }) => theme.text.primary};
         border-radius: 3px;
         margin-left: 14px;
     }

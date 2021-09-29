@@ -17,7 +17,7 @@ export const MainText = styled.p`
     font-weight: 200;
     font-size: 350px;
     line-height: 1;
-    color: #fff;
+    color: ${({ theme }) => theme.text.primary};
     margin-bottom: 100px;
     
     &::after {
@@ -28,7 +28,7 @@ export const MainText = styled.p`
         display: inline-block;
         width: 37px;
         height: 41px;
-        border: solid 5px #fff;
+        border: solid 5px ${({ theme }) => theme.text.primary};;
         border-radius: 50%;
     }
 `;
@@ -37,7 +37,7 @@ export const Meta = styled.div`
         font-family: 'Roboto', sans-serif;
         font-weight: 200;
         font-size: 19px;
-        color: #fff;
+        color: ${({ theme }) => theme.text.primary};
         display: inline-flex;
         align-items: flex-start;
     }

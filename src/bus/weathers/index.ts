@@ -26,10 +26,16 @@ export const useWeathers = () => {
         dispatch(fetchWeatherActionAsync());
     }, []);
 
+    useEffect(() => {
+        dispatch(weathersActions.setCurrentWeatherReducer(selector.weathers[ 0 ]));
+    }, [ selector.weathers ]);
+
     return {
         ...selector,
-        fetch:               () => dispatch(fetchWeatherActionAsync()),
-        setCurrentWeather:   (payload: types.Weather) => dispatch(weathersActions.setCurrentWeatherReducer(payload)),
-        setFilteredWeathers: (payload: types.ArrayWeathers) => dispatch(weathersActions.setFilteredWeathers(payload)),
+        fetch:             () => void dispatch(fetchWeatherActionAsync()),
+        setCurrentWeather: (payload: types.Weather) => void
+        dispatch(weathersActions.setCurrentWeatherReducer(payload)),
+        setFilteredWeathers: (payload: types.ArrayWeathers) => void
+        dispatch(weathersActions.setFilteredWeathers(payload)),
     };
 };

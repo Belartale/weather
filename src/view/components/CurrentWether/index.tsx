@@ -1,32 +1,21 @@
 //!Core
 import React, { FC, useEffect, useState } from 'react';
 
-//! Elements
-// import { Button, Checkbox, Input } from '../../elements';
-
 //! Styles
 import { Container, MainText, Meta, Rainy, Humidity } from './styles';
 
 //! Hooks
 import { useWeathers } from '../../../bus/weathers';
+import { Weather } from '../../../bus/weathers/types';
+import { initialState } from '../../../bus/weathers/slice';
 
 export const CurrentWether: FC = () => {
-    //todo вызвать катом. хук и пол. этот день из reducer !!!!!!!!!!!!!!
-    const { currentWeather }: any = useWeathers();
-    const [ currentDay, setCurrentDay ]: any = useState({
-        id:               '',
-        rain_probability: 0,
-        humidity:         0,
-        day:              0,
-        temperature:      0,
-        type:             '',
-    });
-
+    const { currentWeather } = useWeathers();
+    const [ currentDay, setCurrentDay ]: [Weather, Function] = useState(initialState.currentWeather);
 
     useEffect(() => {
         setCurrentDay(currentWeather);
     }, [ currentWeather ]);
-
 
     return (
         <Container>

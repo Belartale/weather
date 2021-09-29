@@ -84,11 +84,12 @@ export interface InputProps extends
     onChange?: any
 }
 
-export const Input: FC<InputProps> = ({ id, style, type, title, name, value, onChange }) => {
+export const Input: FC<InputProps> = ({ id, style, type, title, name, value, onChange, disabled }) => {
     return (
         <InputContainer style = { style }>
             <StyledLabel htmlFor = { id }>{title}</StyledLabel>
             <StyledInput
+                disabled = { disabled }
                 id = { id }
                 name = { name }
                 type = { type }

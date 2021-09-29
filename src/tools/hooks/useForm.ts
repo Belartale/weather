@@ -24,7 +24,10 @@ export const useForm = <T>(initialValue: T): [T, HandleChange, (newInitialValue:
 
     const setInitialForm = (newInitialValue: T) => void setForm(newInitialValue);
 
-    const resetForm = () => void setForm(initialValue);
+    const resetForm = () => {
+        console.log(initialValue);
+        setForm(initialValue);
+    };
 
     return [ form, handleChange, setInitialForm, resetForm ];
 };

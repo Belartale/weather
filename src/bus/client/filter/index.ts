@@ -11,6 +11,7 @@ import { Weather } from '../../weathers/types';
 
 //! Types
 type FilteredData = Array<Weather>;
+
 export const useFilter = () => {
     const dispatch = useDispatch();
 
@@ -31,8 +32,7 @@ export const useFilter = () => {
     });
     //.slice(0, 7)
 
-
-    useEffect(() => dispatch(weathersActions.setFilteredWeathers(newFilteredData)), [ params.filter ]);
+    useEffect(() => void dispatch(weathersActions.setFilteredWeathers(newFilteredData)), [ params.filter ]);
 
     return {
         filteredWeathers: newFilteredData,

@@ -17,7 +17,7 @@ type ContainerTypes = {
     number?: string;
 }
 
-export const ContainerIndentBotton: FC<ContainerTypes> = ({ children, number }) => {
+export const ContainerIndentBottom: FC<ContainerTypes> = ({ children, number }) => {
     return (
         <Styled number = { number }>
             {children}

@@ -7,7 +7,7 @@ import { FilterState } from './types';
 //! Reducers
 import * as reducers from './reducers';
 
-const initialState: FilterState = {
+export const initialState: FilterState = {
     kindWeather:    null,
     minTemperature: null,
     maxTemperature: null,

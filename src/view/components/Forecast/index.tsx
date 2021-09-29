@@ -1,6 +1,6 @@
 //!Core
 import React, { FC, useEffect, useState } from 'react';
-import { CardDay } from '../../elements';
+import { CardDay, Spinner } from '../../elements';
 import moment from 'moment';
 
 //! Styles
@@ -14,13 +14,7 @@ export const Forecast: FC = () => {
     const { weathers, loading, setCurrentWeather } = useWeathers();
     const [ cardsWeathers, setCardsWeathers ]: [Array<Types.Weather>, Function] = useState([]);
 
-    useEffect(() => {
-        (async () => {
-            await setCardsWeathers(weathers);
-            // console.log('22222222222222');
-            // console.log(cardsWeathers);
-        })();
-    }, [ weathers ]);
+    useEffect(() => setCardsWeathers(weathers), [ weathers ]);
 
     return (
         <Container>
@@ -37,7 +31,7 @@ export const Forecast: FC = () => {
                         />
                     );
                 })
-                : 'Loading...'
+                : <Spinner/>
             }
         </Container>
     );

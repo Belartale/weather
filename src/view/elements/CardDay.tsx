@@ -108,14 +108,13 @@ export const Number = styled.span`
         display: inline-block;
         width: 5px;
         height: 6px;
-        border: solid 1px #fff;
+        border: solid 1px ${({ theme }) => theme.text.primary};
         border-radius: 50%;
     }
 `;
 
 
 export const CardDay: FC<CardDayInterface> = ({ text, number, typeDay, ...otherProps  }) => {
-    //todo по нажатию сетать Obj что приходит из Forecast и .map()
     return (
         <Styled
             typeDay = { typeDay }

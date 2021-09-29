@@ -19,7 +19,7 @@ const Main: FC = () => {
                     <Head/>
                     <CurrentWether />
                     <Forecast/>
-                </> : <NoAvailable>По заданным критериям нет доступных дней!</NoAvailable> }
+                  </> : <NoAvailable>По заданным критериям нет доступных дней!</NoAvailable> }
         </Container>
     );
 };

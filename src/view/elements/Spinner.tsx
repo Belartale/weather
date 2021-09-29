@@ -1,65 +1,27 @@
-// Core
-import React, { FC, useState, useEffect } from 'react';
+//! Core
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 
-interface SpinnerProps {
-    size?: SizeProp
-    absolute?: boolean
-}
-
-const Container = styled.div<{ isActive: boolean, absolute: boolean }>`
+//! Styles
+const Container = styled.div`
+    height: 100%;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: rgba(0,0,0,0.4);
-    cursor: not-allowed;
-
-    ${({ absolute }) => absolute
-        ? {
-            position: 'absolute',
-            top:      0,
-            bottom:   0,
-            left:     0,
-            right:    0,
-            zIndex:   1,
-        }
-        : {
-            width:  '100%',
-            height: '100%',
-        }}
-
-
-    opacity: 0;
-    ${({ isActive }) => isActive && { opacity: 1 }};
-    transition: opacity 1s;
+    justify-content: center;
+    font-size: 30px;
+    color: ${({ theme }) => theme.text.primary };
 `;
 
-// eslint-disable-next-line init-declarations
-let timerId: ReturnType<typeof setTimeout>;
+//! Types
+interface PropTypes {
+    children?: string
+}
 
-export const Spinner: FC<SpinnerProps> = ({ size = '5x', absolute = false }) => {
-    const [ isActive, setIsActive ] = useState(false);
-
-
-    useEffect(() => {
-        timerId = setTimeout(() => void setIsActive(true), 500);
-
-        return () => clearTimeout(timerId);
-    }, []);
-
+export const Spinner: FC<PropTypes> = ({ children = 'Loading...' }) => {
     return (
-        <Container
-            absolute = { absolute }
-            isActive = { isActive }>
-            <FontAwesomeIcon
-                spin
-                color = '#faa307'
-                icon = 'cog'
-                size = { size }
-                title = 'Loading...'
-            />
+        <Container>
+            <p>{children}</p>
         </Container>
     );
 };

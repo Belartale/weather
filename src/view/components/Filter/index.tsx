@@ -1,14 +1,14 @@
 //! Core
-import React, { FC, useEffect, useState } from 'react';
-import { EventChannel } from 'redux-saga';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
 //! Hooks
 import { useFilter } from '../../../bus/client/filter';
+import { initialState } from '../../../bus/client/filter/slice';
 import { useWeathers } from '../../../bus/weathers';
 import { useForm } from '../../../tools/hooks';
 
 //! Containers
-import { ContainerIndentBotton } from '../../containers/ContainerIndentBotton';
+import { ContainerIndentBottom } from '../../containers/ContainerIndentBottom';
 
 //! Elements
 import { Button, Input } from '../../elements';
@@ -16,54 +16,30 @@ import { Button, Input } from '../../elements';
 //! Styles
 import { ContainerForm } from './styles';
 
-//! Types
-// import { Filter as IFilter } from '../../../bus/filter/types';
-
-const InitialState = {
-    kindWeather:    null,
-    minTemperature: null,
-    maxTemperature: null,
-};
 
 export const Filter: FC = () => {
     const { filteredWeathers, setFilter } = useFilter();
-    const { weathers, setFilteredWeathers, fetch } = useWeathers();
+    const { setFilteredWeathers, fetch } = useWeathers();
 
     const [ isReset, setIsReset ] = useState(false);
 
-    const [ form, handleChange, setInitialForm, resetForm  ] = useForm<typeof InitialState>(InitialState);
+    const [ form, handleChange, , resetForm  ] = useForm<typeof initialState>(initialState);
     const [ isCloseBtn, setIsCloseBtn ] = useState(true);
 
-    // useEffect(() => ,)
-
-
-    const onSubmitFilter = (event: any) => {
-        // event.preventDefault();
-
-        // console.log(form);
-
+    const onSubmitFilter = () => {
         setFilter(form);
-        const adfd = filteredWeathers;
 
-        setFilteredWeathers(adfd);
-        console.log(filteredWeathers);
+        setFilteredWeathers(filteredWeathers);
         setIsReset(true);
     };
 
-    const onResetFilter = (event: any) => {
-        // event.preventDefault();
-
+    const onResetFilter = () => {
         setFilter({
             kindWeather:    null,
             minTemperature: null,
             maxTemperature: null,
         });
 
-        setInitialForm({
-            kindWeather:    null,
-            minTemperature: null,
-            maxTemperature: null,
-        });
         resetForm();
         fetch();
         setIsReset(false);
@@ -77,69 +53,57 @@ export const Filter: FC = () => {
             : setIsCloseBtn(true);
     }, [ form.minTemperature, form.maxTemperature, form.kindWeather ]);
 
-
     return (
         <ContainerForm onSubmit = { (event) => event.preventDefault() }>
-            <ContainerIndentBotton>
+            <ContainerIndentBottom>
                 <Input
+                    disabled = { isReset }
                     id = 'Облачно'
                     name = 'kindWeather'
                     title = 'Облачно'
                     type = 'radio'
                     value = 'cloudy'
-                    onChange = { (event: any) => void handleChange(event, false)  }
+                    onChange = { (event: ChangeEvent<HTMLInputElement>) => void handleChange(event, false)  }
                 />
-            </ContainerIndentBotton>
-            <ContainerIndentBotton>
+            </ContainerIndentBottom>
+            <ContainerIndentBottom>
                 <Input
+                    disabled = { isReset }
                     id = 'Солнечно'
                     name = 'kindWeather'
                     title = 'Солнечно'
                     type = 'radio'
                     value = 'sunny'
-                    onChange = { (event: any) => void handleChange(event, false)  }
+                    onChange = { (event: ChangeEvent<HTMLInputElement>) => void handleChange(event, false)  }
                 />
-            </ContainerIndentBotton>
-            <ContainerIndentBotton>
+            </ContainerIndentBottom>
+            <ContainerIndentBottom>
                 <Input
+                    disabled = { isReset }
                     id = 'Минимальная'
                     name = 'minTemperature'
                     title = 'Минимальная температура'
                     type = 'number'
-                    value = { form.minTemperature }
-                    onChange = { (event: any) => handleChange(event, true) }
+                    value = { form.minTemperature === null ? '' : form.minTemperature  }
+                    onChange = { (event: ChangeEvent<HTMLInputElement>) => handleChange(event, true) }
                 />
-            </ContainerIndentBotton>
-            <ContainerIndentBotton>
+            </ContainerIndentBottom>
+            <ContainerIndentBottom>
                 <Input
+                    disabled = { isReset }
                     id = 'Максимальная'
                     name = 'maxTemperature'
                     title = 'Максимальная температура'
                     type = 'number'
-                    value = { form.maxTemperature }
-                    onChange = { (event: any) => handleChange(event, true)  }
+                    value = { form.maxTemperature === null ? '' : form.maxTemperature }
+                    onChange = { (event: ChangeEvent<HTMLInputElement>) => handleChange(event, true)  }
                 />
-            </ContainerIndentBotton>
-            { !isReset
-                ? <Button
-                        disabled = { isCloseBtn }
-                        onClick = { onSubmitFilter } >Отфильтровать
-                </Button>
-                : <Button
-                        onClick = { onResetFilter } >Сброс
-                </Button>
-            }
-
-
-            {/* <Button
-                disabled = { isCloseBtn }
-                onClick = { onSubmitFilter } >Отфильтровать
-            </Button>
-
+            </ContainerIndentBottom>
 
             <Button
-                onClick = { onResetFilter } >Сброс
-            </Button> */}
+                disabled = { isCloseBtn }
+                onClick = { !isReset ? onSubmitFilter : onResetFilter } >{!isReset ? 'Отфильтровать' : 'Сброс'}
+            </Button>
 
         </ContainerForm>
     );

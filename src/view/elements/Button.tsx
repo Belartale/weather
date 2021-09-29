@@ -31,7 +31,7 @@ const Styled = styled.button<ButtonProps>`
             cursor: pointer;
             background-color: ${({ theme }) => theme.button.hover};;
         }
-    ` : '' }
+    ` : '' }    
 `;
 
 export const Button: FC<ButtonProps> = ({ children, disabled, ...otherProps  }) => {

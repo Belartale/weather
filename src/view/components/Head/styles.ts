@@ -60,6 +60,6 @@ export const DateStyled = styled.span`
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
     font-size: 14px;
-    color: #fff;
+    color: ${({ theme }) => theme.text.primary};
     text-transform: uppercase;
 `;
