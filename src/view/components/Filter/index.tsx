@@ -22,6 +22,7 @@ export const Filter: FC = () => {
     const { setFilteredWeathers, fetch } = useWeathers();
 
     const [ isReset, setIsReset ] = useState(false);
+    const [ isSelect, setIsSelect ] = useState(false);
 
     const [ form, handleChange, , resetForm  ] = useForm<typeof initialState>(initialState);
     const [ isCloseBtn, setIsCloseBtn ] = useState(true);
@@ -57,6 +58,7 @@ export const Filter: FC = () => {
         <ContainerForm onSubmit = { (event) => event.preventDefault() }>
             <ContainerIndentBottom>
                 <Input
+                    checked = { form.kindWeather === 'cloudy' }
                     disabled = { isReset }
                     id = 'Облачно'
                     name = 'kindWeather'
@@ -68,6 +70,7 @@ export const Filter: FC = () => {
             </ContainerIndentBottom>
             <ContainerIndentBottom>
                 <Input
+                    checked = { form.kindWeather === 'sunny' }
                     disabled = { isReset }
                     id = 'Солнечно'
                     name = 'kindWeather'
