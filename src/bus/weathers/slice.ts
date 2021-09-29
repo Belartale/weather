@@ -7,15 +7,10 @@ import { WeathersState } from './types';
 //! Reducers
 import * as reducers from './reducers';
 
-export const initialState: WeathersState = { data:           [],
-    currentWeather: {
-        id:               '',
-        rain_probability: 0,
-        humidity:         0,
-        day:              0,
-        temperature:      0,
-        type:             '',
-    }};
+export const initialState: WeathersState = {
+    data:           [],
+    currentWeather: null,
+};
 
 export const weathersSlice = createSlice({
     name: 'weathers',

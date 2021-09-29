@@ -1,28 +1,33 @@
 //!Core
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
+import { isNull } from 'lodash';
+
+//! Components
+import { Spinner } from '../../elements';
+
+//! Hooks
+import { useWeathers } from '../../../bus/weathers';
 
 //! Styles
 import { Container, MainText, Meta, Rainy, Humidity } from './styles';
 
-//! Hooks
-import { useWeathers } from '../../../bus/weathers';
-import { Weather } from '../../../bus/weathers/types';
-import { initialState } from '../../../bus/weathers/slice';
-
 export const CurrentWether: FC = () => {
-    const { currentWeather } = useWeathers();
-    const [ currentDay, setCurrentDay ]: [Weather, Function] = useState(initialState.currentWeather);
+    const { loading, currentWeather } = useWeathers();
 
-    useEffect(() => {
-        setCurrentDay(currentWeather);
-    }, [ currentWeather ]);
+    if (loading) {
+        return <Spinner />;
+    }
+
+    if (isNull(currentWeather)) {
+        return <div> No current weather.</div>;
+    }
 
     return (
         <Container>
-            <MainText>{currentDay.temperature}</MainText>
+            <MainText>{currentWeather.temperature}</MainText>
             <Meta>
-                <Rainy>%{currentDay.rain_probability}</Rainy>
-                <Humidity>%{currentDay.humidity}</Humidity>
+                <Rainy>%{currentWeather.rain_probability}</Rainy>
+                <Humidity>%{currentWeather.humidity}</Humidity>
             </Meta>
         </Container>
     );

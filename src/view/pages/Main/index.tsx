@@ -1,34 +1,37 @@
 //! Core
 import React, { FC } from 'react';
-import { useSelector } from '../../../tools/hooks';
 
 //! Components
 import { CurrentWether, ErrorBoundary, Filter, Forecast, Head } from '../../components';
+
+//! Redux
+import { useWeathers } from '../../../bus/weathers';
 
 //! Styles
 import { Container, NoAvailable } from './styles';
 
 const Main: FC = () => {
-    const { weathers } = useSelector((state) => state);
-
-    const checkWeathers = () => {
-        if (weathers.data[ 0 ]) {
-            return (
-                <div>
-                    <Head/>
-                    <CurrentWether />
-                    <Forecast/>
-                </div>
-            );
-        }
-
-        return <NoAvailable>По заданным критериям нет доступных дней!</NoAvailable>;
-    };
+    const { weathers } = useWeathers({
+        isFetchingEnable: true,
+    });
 
     return (
         <Container>
-            <Filter />
-            {checkWeathers()}
+            {
+                weathers.length !== 0
+                    ? (
+                        <>
+                            <Filter />
+                            <Head/>
+                            <CurrentWether />
+                            <Forecast/>
+                        </>
+                    )
+                    : (
+                        <NoAvailable>По заданным критериям нет доступных дней!</NoAvailable>
+                    )
+            }
+
         </Container>
     );
 };

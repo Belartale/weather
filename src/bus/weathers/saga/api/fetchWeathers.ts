@@ -7,7 +7,7 @@ import { API_URL_WEATHERS } from '../../../../init/constants';
 //! Types
 import * as types from '../../types';
 
-export const fetchWeathers: () => Promise<types.WeathersState> = async () => {
+export const fetchWeathers: () => Promise<types.ArrayWeathers> = async () => {
     const response = await fetch(`${API_URL_WEATHERS}/forecast?limit=30`, {
         method:  'GET',
         headers: {
@@ -25,5 +25,7 @@ export const fetchWeathers: () => Promise<types.WeathersState> = async () => {
         });
     }
 
-    return response.json();
+    const { data }: { data: types.ArrayWeathers } = await response.json();
+
+    return data;
 };

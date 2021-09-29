@@ -1,7 +1,8 @@
 //!Core
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { CardDay, Spinner } from '../../elements';
 import moment from 'moment';
+import { isNull } from 'lodash';
 
 //! Styles
 import { Container } from './styles';
@@ -11,16 +12,23 @@ import { useWeathers } from '../../../bus/weathers';
 import * as Types from '../../../bus/weathers/types';
 
 export const Forecast: FC = () => {
-    const { weathers, loading, setCurrentWeather } = useWeathers();
-    const [ cardsWeathers, setCardsWeathers ]: [Array<Types.Weather>, Function] = useState([]);
+    const {
+        weathers, loading,
+        currentWeather, setCurrentWeather,
+    } = useWeathers();
 
-    useEffect(() => setCardsWeathers(weathers), [ weathers ]);
+    if (loading) {
+        return <Spinner />;
+    }
+
+    if (isNull(currentWeather)) {
+        return <div> No current weather.</div>;
+    }
 
     return (
         <Container>
-
-            { !loading
-                ? cardsWeathers.slice(0, 7).map((element: Types.Weather) => {
+            {
+                weathers.slice(0, 7).map((element: Types.Weather) => {
                     return (
                         <CardDay
                             key = { element.id }
@@ -31,7 +39,6 @@ export const Forecast: FC = () => {
                         />
                     );
                 })
-                : <Spinner/>
             }
         </Container>
     );

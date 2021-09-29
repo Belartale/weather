@@ -14,16 +14,12 @@ type FilteredData = Array<Weather>;
 
 export const useFilter = () => {
     const dispatch = useDispatch();
+    const { weathers, filter } = useSelector(({ weathers, filter }) => ({ weathers, filter }));
 
-    const params = useSelector((state) => ({
-        weathers: state.weathers.data,
-        filter:   state.filter,
-    }));
-
-    const newFilteredData: FilteredData = params.weathers.filter((day) => {
-        if ((params.filter.kindWeather && day.type !== params.filter.kindWeather)
-            || (params.filter.minTemperature && day.temperature < Number(params.filter.minTemperature))
-            || (params.filter.maxTemperature && day.temperature > Number(params.filter.maxTemperature))
+    const newFilteredData: FilteredData = weathers.data.filter((day) => {
+        if ((filter.kindWeather && day.type !== filter.kindWeather)
+            || (filter.minTemperature && day.temperature < Number(filter.minTemperature))
+            || (filter.maxTemperature && day.temperature > Number(filter.maxTemperature))
         ) {
             return false;
         }
@@ -32,7 +28,7 @@ export const useFilter = () => {
     });
     //.slice(0, 7)
 
-    useEffect(() => void dispatch(weathersActions.setFilteredWeathers(newFilteredData)), [ params.filter ]);
+    useEffect(() => void dispatch(weathersActions.setFilteredWeathers(newFilteredData)), [ filter ]);
 
     return {
         filteredWeathers: newFilteredData,

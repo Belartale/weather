@@ -12,11 +12,13 @@ export type Weather = {
 };
 export type ArrayWeathers = Array<Weather>;
 
-export type WeathersState = { data: ArrayWeathers, currentWeather: Weather };
-
+export type WeathersState = {
+    data: ArrayWeathers
+    currentWeather: Weather | null
+};
 
 //! Contracts
-export type SetWeathersContract = CaseReducer<WeathersState, PayloadAction<WeathersState>>;
+export type SetWeathersContract = CaseReducer<WeathersState, PayloadAction<ArrayWeathers>>;
 
 export type SetFilteredWeathersContract = CaseReducer<WeathersState, PayloadAction<ArrayWeathers>>;
 

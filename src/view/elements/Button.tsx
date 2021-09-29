@@ -22,16 +22,16 @@ const Styled = styled.button<ButtonProps>`
     color: ${({ theme }) => theme.text.primary};
     text-transform: uppercase;
 
-    
     ${({ disabled }) => disabled === true ? css`
         opacity: .3;
     `
-        : disabled === false ? css`
+        : ''}
+    ${({ disabled }) => disabled === false ? css`
         &:hover {
             cursor: pointer;
             background-color: ${({ theme }) => theme.button.hover};;
         }
-    ` : '' }    
+    ` : ''}
 `;
 
 export const Button: FC<ButtonProps> = ({ children, disabled, ...otherProps  }) => {

@@ -7,8 +7,8 @@ type TypeAction = {
 
 //! Reducers
 export const setWeathers: types.SetWeathersContract = (state, action) => {
-    state.data = action.payload.data;
-    state.currentWeather = action.payload.data[ 0 ];
+    state.data = action.payload;
+    state.currentWeather = action.payload[ 0 ];
 };
 
 export const setCurrentWeatherReducer: types.SetCurrentWeatherContract = (

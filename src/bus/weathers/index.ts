@@ -12,10 +12,12 @@ import { fetchWeatherActionAsync } from './saga/actions';
 import * as types from './types';
 import { weathersActions } from './slice';
 
-//! Hooks
-export const useWeathers = () => {
-    const dispatch = useDispatch();
+type Options = {
+    isFetchingEnable?: boolean
+} | void
 
+export const useWeathers = ({ isFetchingEnable = false }: Options) => {
+    const dispatch = useDispatch();
     const selector = useSelector((state) => ({
         loading:        state.togglers.isWeathersFetching,
         weathers:       state.weathers.data,
@@ -23,19 +25,19 @@ export const useWeathers = () => {
     }));
 
     useEffect(() => {
-        dispatch(fetchWeatherActionAsync());
+        if (isFetchingEnable) {
+            dispatch(fetchWeatherActionAsync());
+        }
     }, []);
-
-    useEffect(() => {
-        dispatch(weathersActions.setCurrentWeatherReducer(selector.weathers[ 0 ]));
-    }, [ selector.weathers ]);
 
     return {
         ...selector,
         fetch:             () => void dispatch(fetchWeatherActionAsync()),
-        setCurrentWeather: (payload: types.Weather) => void
-        dispatch(weathersActions.setCurrentWeatherReducer(payload)),
-        setFilteredWeathers: (payload: types.ArrayWeathers) => void
-        dispatch(weathersActions.setFilteredWeathers(payload)),
+        setCurrentWeather: (payload: types.Weather) => void dispatch(
+            weathersActions.setCurrentWeatherReducer(payload),
+        ),
+        setFilteredWeathers: (payload: types.ArrayWeathers) => void dispatch(
+            weathersActions.setFilteredWeathers(payload),
+        ),
     };
 };
