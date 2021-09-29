@@ -11,15 +11,24 @@ import { Container, NoAvailable } from './styles';
 const Main: FC = () => {
     const { weathers } = useSelector((state) => state);
 
-    return (
-        <Container>
-            <Filter />
-            { weathers.data[ 0 ]
-                ? <>
+    const checkWeathers = () => {
+        if (weathers.data[ 0 ]) {
+            return (
+                <div>
                     <Head/>
                     <CurrentWether />
                     <Forecast/>
-                  </> : <NoAvailable>По заданным критериям нет доступных дней!</NoAvailable> }
+                </div>
+            );
+        }
+
+        return <NoAvailable>По заданным критериям нет доступных дней!</NoAvailable>;
+    };
+
+    return (
+        <Container>
+            <Filter />
+            {checkWeathers()}
         </Container>
     );
 };

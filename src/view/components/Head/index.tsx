@@ -10,19 +10,21 @@ import { HeadStyled, IconStyled, CurrentDateStyled, TextStyled, DateStyled } fro
 export const Head: FC = () => {
     const { loading, currentWeather } = useWeathers();
 
-    return (
-        <>
-            {
-                !loading
-                    ? <HeadStyled>
-                        <IconStyled typeImage = { currentWeather.type } />
-                        <CurrentDateStyled>
-                            <TextStyled>{moment(currentWeather.day).format('dddd') }</TextStyled>
-                            <DateStyled>{moment(currentWeather.day).format('LL')} </DateStyled>
-                        </CurrentDateStyled>
-                      </HeadStyled>
-                    : <Spinner/>
-            }
-        </>
-    );
+    const checkDownload = () => {
+        if (!loading) {
+            return (
+                <HeadStyled>
+                    <IconStyled typeImage = { currentWeather.type } />
+                    <CurrentDateStyled>
+                        <TextStyled>{moment(currentWeather.day).format('dddd') }</TextStyled>
+                        <DateStyled>{moment(currentWeather.day).format('LL')} </DateStyled>
+                    </CurrentDateStyled>
+                </HeadStyled>
+            );
+        }
+
+        return <Spinner/>;
+    };
+
+    return checkDownload();
 };

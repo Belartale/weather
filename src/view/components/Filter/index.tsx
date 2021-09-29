@@ -22,7 +22,6 @@ export const Filter: FC = () => {
     const { setFilteredWeathers, fetch } = useWeathers();
 
     const [ isReset, setIsReset ] = useState(false);
-    const [ isSelect, setIsSelect ] = useState(false);
 
     const [ form, handleChange, , resetForm  ] = useForm<typeof initialState>(initialState);
     const [ isCloseBtn, setIsCloseBtn ] = useState(true);
