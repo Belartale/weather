@@ -1,11 +1,11 @@
-// Core
+//! Core
 import { SagaIterator } from '@redux-saga/core';
 import { takeEvery, all, call } from 'redux-saga/effects';
 
-// Types
+//! Types
 import * as types from './types';
 
-// // Workers
+//! Workers
 import {
     fetchWeathers,
 } from './workers';

@@ -56,9 +56,3 @@ export const Checkbox: FC<CheckboxInterface> = ({ children, ...otherProps  }) =>
     );
 };
 
-
-// background: radial-gradient(ellipse, #DfDfDf 0%, #FFF 60%);
-// border-image: linear-gradient(to right, #FFF, #933a, #724, #FFF ) 47% 0%;
-
-// border: 2px solid #147;
-// border-bottom: 2px solid #FFF;
