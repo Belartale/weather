@@ -40,3 +40,16 @@ export function* fetchWeathers(/* { payload }: FetchWeathersActionAsync */) {
         }));
     }
 }
+
+//!
+//?
+
+//. text text TEXT
+
+//, text text TEXT
+
+//white text text TEXT
+
+
+//,, text text TEXT
+//whiteand dark

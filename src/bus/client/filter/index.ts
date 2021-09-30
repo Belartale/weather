@@ -20,7 +20,8 @@ export const useFilter = () => {
         if ((filter.kindWeather && day.type !== filter.kindWeather)
             || (filter.minTemperature && day.temperature < Number(filter.minTemperature))
             || (filter.maxTemperature && day.temperature > Number(filter.maxTemperature))
-            || (filter.maxTemperature === 0 && filter.maxTemperature === 0)
+
+            || (filter.minTemperature === 0 && filter.maxTemperature === 0 && day.temperature !== 0)
         ) {
             return false;
         }
