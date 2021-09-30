@@ -1,42 +1,31 @@
 //! Core
-import { call, put/* , select */ } from 'redux-saga/effects';
-
-
-//! Redux
-import { weathersActions } from '../../slice';
-import { togglerCreatorAction } from '../../../client/togglers';
-
-//! Tools
-import * as API from '../api';
-// import { makeRequest } from '../../../../tools/utils';
+import { put } from 'redux-saga/effects';
 
 //! Types
-// import { FetchWeathersActionAsync } from '../types';
 import { ArrayWeathers as Days } from '../../types';
-// import { RootState } from '../../../../init/redux';
 
-export function* fetchWeathers(/* { payload }: FetchWeathersActionAsync */) {
-    // console.log('🚀payload', payload);
-    try {
-        yield put(togglerCreatorAction({
-            type:  'isWeathersFetching',
-            value: true,
-        }));
+//! Sync actions
+import { weathersActions } from '../../slice';
 
-        // const togglers = yield select<(store: RootState) => RootState>(store) => store.togglers;
+//! API
+import * as API from '../api';
 
-        // console.log('🚀togglers', togglers);
+//! Instruments
+import { makeRequest } from '../../../../tools/utils';
 
-        const result: Days = yield call(API.fetchWeathers);
+//! Action
+import { FetchWeathersActionAsync } from '../types';
 
-        yield put(weathersActions.setWeathers(result));
+export function* fetchWeathers({ payload }: FetchWeathersActionAsync) {
+    console.log('🚀payload', payload);
+
+    const result: Days | null = yield makeRequest<Days>({
+        fetcher:      API.fetchWeathers,
+        togglerType:  'isWeathersFetching',
+        succesAction: weathersActions.setWeathers,
+    });
+
+    if (result) {
         yield put(weathersActions.setCurrentWeather(result[ 0 ]));
-    } catch (error) {
-        console.log('🚀error', error);
-    } finally {
-        yield put(togglerCreatorAction({
-            type:  'isWeathersFetching',
-            value: false,
-        }));
     }
 }
