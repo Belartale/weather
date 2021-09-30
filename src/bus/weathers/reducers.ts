@@ -11,7 +11,7 @@ export const setWeathers: types.SetWeathersContract = (state, action) => {
     state.currentWeather = action.payload[ 0 ];
 };
 
-export const setCurrentWeatherReducer: types.SetCurrentWeatherContract = (
+export const setCurrentWeather: types.SetCurrentWeatherContract = (
     state: types.WeathersState, action: TypeAction,
 ) => {
     state.currentWeather = action.payload;

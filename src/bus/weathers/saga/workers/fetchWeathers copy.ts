@@ -26,6 +26,6 @@ export function* fetchWeathers({ payload }: FetchWeathersActionAsync) {
     });
 
     if (result) {
-        yield put(weathersActions.setCurrentWeatherReducer(result[ 0 ]));
+        yield put(weathersActions.setCurrentWeather(result[ 0 ]));
     }
 }

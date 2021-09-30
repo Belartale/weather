@@ -19,7 +19,7 @@ import { ContainerForm } from './styles';
 
 export const Filter: FC = () => {
     const { filteredWeathers, setFilter } = useFilter();
-    const { setFilteredWeathers, fetch } = useWeathers({});
+    const { fetch } = useWeathers({});
 
     const [ isReset, setIsReset ] = useState(false);
 
@@ -29,8 +29,8 @@ export const Filter: FC = () => {
     const onSubmitFilter = () => {
         setFilter(form);
 
-        setFilteredWeathers(filteredWeathers);
         setIsReset(true);
+        console.log(filteredWeathers);
     };
 
     const onResetFilter = () => {

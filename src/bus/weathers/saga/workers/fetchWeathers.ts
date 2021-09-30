@@ -30,7 +30,7 @@ export function* fetchWeathers(/* { payload }: FetchWeathersActionAsync */) {
         const result: Days = yield call(API.fetchWeathers);
 
         yield put(weathersActions.setWeathers(result));
-        yield put(weathersActions.setCurrentWeatherReducer(result[ 0 ]));
+        yield put(weathersActions.setCurrentWeather(result[ 0 ]));
     } catch (error) {
         console.log('🚀error', error);
     } finally {

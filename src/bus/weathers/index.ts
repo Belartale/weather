@@ -24,16 +24,17 @@ export const useWeathers = (options: Options) => {
 
     useEffect(() => {
         if (options?.isFetchingEnable) {
-            dispatch(fetchWeatherActionAsync(1213));
+            dispatch(fetchWeatherActionAsync(10));
         }
     }, []);
 
     return {
         ...selector,
-        fetch:             () => void dispatch(fetchWeatherActionAsync(3)),
-        setCurrentWeather: (payload: types.Weather) => void dispatch(
-            weathersActions.setCurrentWeatherReducer(payload),
+        fetch:             () => void dispatch(fetchWeatherActionAsync(0)),
+        setCurrentWeather: (payload: types.Weather) => dispatch(
+            weathersActions.setCurrentWeather(payload),
         ),
+
         setFilteredWeathers: (payload: types.ArrayWeathers) => void dispatch(
             weathersActions.setFilteredWeathers(payload),
         ),

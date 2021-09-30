@@ -20,6 +20,7 @@ export const useFilter = () => {
         if ((filter.kindWeather && day.type !== filter.kindWeather)
             || (filter.minTemperature && day.temperature < Number(filter.minTemperature))
             || (filter.maxTemperature && day.temperature > Number(filter.maxTemperature))
+            || (filter.maxTemperature === 0 && filter.maxTemperature === 0)
         ) {
             return false;
         }
@@ -28,7 +29,10 @@ export const useFilter = () => {
     });
     //.slice(0, 7)
 
-    useEffect(() => void dispatch(weathersActions.setFilteredWeathers(newFilteredData)), [ filter ]);
+    useEffect(() => {
+        dispatch(weathersActions.setFilteredWeathers(newFilteredData));
+        dispatch(weathersActions.setCurrentWeather(newFilteredData[ 0 ]));
+    }, [ filter ]);
 
     return {
         filteredWeathers: newFilteredData,
