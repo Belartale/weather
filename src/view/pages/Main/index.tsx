@@ -17,11 +17,11 @@ const Main: FC = () => {
 
     return (
         <Container>
+            <Filter />
             {
                 weathers.length !== 0
                     ? (
                         <>
-                            <Filter />
                             <Head/>
                             <CurrentWether />
                             <Forecast/>
