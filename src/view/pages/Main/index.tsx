@@ -7,17 +7,25 @@ import { CurrentWether, ErrorBoundary, Filter, Forecast, Head } from '../../comp
 //! Redux
 import { useWeathers } from '../../../bus/weathers';
 
+//! Hooks
+import { useFilter } from '../../../bus/client/filter';
+
 //! Styles
 import { Container, NoAvailable } from './styles';
 
 const Main: FC = () => {
-    const { weathers } = useWeathers({
+    const { filteredWeathers, setFilter } = useFilter();
+    const { weathers, fetch } = useWeathers({
         isFetchingEnable: true,
     });
 
     return (
         <Container>
-            <Filter />
+            <Filter
+                fetch = { fetch }
+                filteredWeathers = { filteredWeathers }
+                setFilter = { setFilter }
+            />
             {
                 weathers.length !== 0
                     ? (

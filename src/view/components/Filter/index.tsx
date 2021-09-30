@@ -16,11 +16,14 @@ import { Button, Input } from '../../elements';
 //! Styles
 import { ContainerForm } from './styles';
 
+//! Types
+interface PropTypes {
+    filteredWeathers: any;
+    setFilter: any;
+    fetch: any;
+}
 
-export const Filter: FC = () => {
-    const { filteredWeathers, setFilter } = useFilter();
-    const { fetch } = useWeathers({});
-
+export const Filter: FC<PropTypes> = ({ filteredWeathers, setFilter, fetch }) => {
     const [ isReset, setIsReset ] = useState(false);
 
     const [ form, handleChange, , resetForm  ] = useForm<typeof initialState>(initialState);
