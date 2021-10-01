@@ -2,9 +2,7 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
 //! Hooks
-import { useFilter } from '../../../bus/client/filter';
 import { initialState } from '../../../bus/client/filter/slice';
-import { useWeathers } from '../../../bus/weathers';
 import { useForm } from '../../../tools/hooks';
 
 //! Containers
@@ -17,13 +15,14 @@ import { Button, Input } from '../../elements';
 import { ContainerForm } from './styles';
 
 //! Types
+import { FilteredData, SetFilterAction } from '../../../bus/client/filter/types';
 interface PropTypes {
-    filteredWeathers: any;
-    setFilter: any;
-    fetch: any;
+    filteredWeathers: FilteredData;
+    setFilter: SetFilterAction;
+    fetch: () => void;
 }
 
-export const Filter: FC<PropTypes> = ({ filteredWeathers, setFilter, fetch }) => {
+export const Filter: FC<PropTypes> = ({ setFilter, fetch }) => {
     const [ isReset, setIsReset ] = useState(false);
 
     const [ form, handleChange, , resetForm  ] = useForm<typeof initialState>(initialState);
@@ -33,7 +32,6 @@ export const Filter: FC<PropTypes> = ({ filteredWeathers, setFilter, fetch }) =>
         setFilter(form);
 
         setIsReset(true);
-        console.log(filteredWeathers);
     };
 
     const onResetFilter = () => {

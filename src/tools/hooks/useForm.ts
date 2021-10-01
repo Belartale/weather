@@ -25,7 +25,6 @@ export const useForm = <T>(initialValue: T): [T, HandleChange, (newInitialValue:
     const setInitialForm = (newInitialValue: T) => void setForm(newInitialValue);
 
     const resetForm = () => {
-        console.log(initialValue);
         setForm(initialValue);
     };
 

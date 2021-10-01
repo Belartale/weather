@@ -1,5 +1,6 @@
 //! Core
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
+import { Weather } from '../../weathers/types';
 
 //! State
 export type Filter = {
@@ -18,4 +19,7 @@ export type SetFilterActionType = {
     type: typeof SET_FILTER;
     payload: Filter;
 };
-export type SetFilterContractAction = (payload: Filter) => SetFilterActionType;
+export type SetFilterAction = (payload: Filter) => void;
+
+//! Types
+export type FilteredData = Array<Weather>;

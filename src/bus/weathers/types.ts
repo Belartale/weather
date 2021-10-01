@@ -12,9 +12,11 @@ export type Weather = {
 };
 export type ArrayWeathers = Array<Weather>;
 
+export type currentWeather = Weather | null;
+
 export type WeathersState = {
     data: ArrayWeathers
-    currentWeather: Weather | null
+    currentWeather: currentWeather
 };
 
 //! Contracts

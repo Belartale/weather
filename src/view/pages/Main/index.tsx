@@ -1,21 +1,22 @@
 //! Core
 import React, { FC } from 'react';
 
+//! Elements
+import { NoAvailable } from '../../elements';
+
 //! Components
 import { CurrentWether, ErrorBoundary, Filter, Forecast, Head } from '../../components';
 
 //! Redux
 import { useWeathers } from '../../../bus/weathers';
-
-//! Hooks
 import { useFilter } from '../../../bus/client/filter';
 
 //! Styles
-import { Container, NoAvailable } from './styles';
+import { Container } from './styles';
 
 const Main: FC = () => {
     const { filteredWeathers, setFilter } = useFilter();
-    const { weathers, fetch } = useWeathers({
+    const { loading, currentWeather, weathers, fetch, setCurrentWeather } = useWeathers({
         isFetchingEnable: true,
     });
 
@@ -30,13 +31,24 @@ const Main: FC = () => {
                 weathers.length !== 0
                     ? (
                         <>
-                            <Head/>
-                            <CurrentWether />
-                            <Forecast/>
+                            <Head
+                                currentWeather = { currentWeather }
+                                loading = { loading }
+                            />
+                            <CurrentWether
+                                currentWeather = { currentWeather }
+                                loading = { loading }
+                            />
+                            <Forecast
+                                currentWeather = { currentWeather }
+                                loading = { loading }
+                                setCurrentWeather = { setCurrentWeather }
+                                weathers = { weathers }
+                            />
                         </>
                     )
                     : (
-                        <NoAvailable>По заданным критериям нет доступных дней!</NoAvailable>
+                        <NoAvailable center >По заданным критериям нет доступных дней!</NoAvailable>
                     )
             }
 

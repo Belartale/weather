@@ -3,14 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from '../../../tools/hooks';
 
 //! Types
-import { Filter } from './types';
+import { Filter, FilteredData } from './types';
 import { filterActions } from './slice';
 import { weathersActions } from '../../weathers/slice';
 import { useEffect } from 'react';
-import { Weather } from '../../weathers/types';
 
-//! Types
-type FilteredData = Array<Weather>;
 
 export const useFilter = () => {
     const dispatch = useDispatch();

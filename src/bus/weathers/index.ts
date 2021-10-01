@@ -31,7 +31,7 @@ export const useWeathers = (options: Options) => {
     return {
         ...selector,
         fetch:             () => void dispatch(fetchWeatherActionAsync(0)),
-        setCurrentWeather: (payload: types.Weather) => dispatch(
+        setCurrentWeather: (payload: types.Weather) => void dispatch(
             weathersActions.setCurrentWeather(payload),
         ),
 

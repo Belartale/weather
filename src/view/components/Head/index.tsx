@@ -3,26 +3,29 @@ import moment from 'moment';
 import React, { FC } from 'react';
 import { isNull } from 'lodash';
 
-//! Components
-import { Spinner } from '../../elements';
-
-//! Redux
-import { useWeathers } from '../../../bus/weathers';
+//! Elements
+import { NoAvailable, Spinner } from '../../elements';
 
 //! Styles
 import { HeadStyled, IconStyled, CurrentDateStyled, TextStyled, DateStyled } from './styles';
 
-export const Head: FC = () => {
-    const { loading, currentWeather } = useWeathers({});
+//! Types
+import { currentWeather } from '../../../bus/weathers/types';
 
+interface PropTypes {
+    loading: boolean;
+    currentWeather: currentWeather;
+}
+
+export const Head: FC<PropTypes> = ({ loading, currentWeather }) => {
     if (loading) {
         return <Spinner />;
     }
     if (isNull(currentWeather)) {
-        return <div> No current weather.</div>;
+        return <NoAvailable> No current weather.</NoAvailable>;
     }
 
-    return             (
+    return (
         <HeadStyled>
             <IconStyled typeImage = { currentWeather.type } />
             <CurrentDateStyled>

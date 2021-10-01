@@ -1,34 +1,37 @@
 //!Core
 import React, { FC } from 'react';
-import { CardDay, Spinner } from '../../elements';
 import moment from 'moment';
 import { isNull } from 'lodash';
 
+//! Elements
+import { CardDay, NoAvailable, Spinner } from '../../elements';
+
 //! Styles
 import { Container } from './styles';
-import { useWeathers } from '../../../bus/weathers';
 
 //! Types
-import * as Types from '../../../bus/weathers/types';
+import { ArrayWeathers, Weather, currentWeather } from '../../../bus/weathers/types';
 
-export const Forecast: FC = () => {
-    const {
-        weathers, loading,
-        currentWeather, setCurrentWeather,
-    } = useWeathers({});
+interface PropTypes {
+    loading: boolean;
+    weathers: ArrayWeathers;
+    currentWeather: currentWeather;
+    setCurrentWeather: (payload: Weather) => void;
+}
 
+export const Forecast: FC<PropTypes> = ({ loading, weathers, currentWeather, setCurrentWeather }) => {
     if (loading) {
         return <Spinner />;
     }
 
     if (isNull(currentWeather)) {
-        return <div> No current weather.</div>;
+        return <NoAvailable> No current weathers.</NoAvailable>;
     }
 
     return (
         <Container>
             {
-                weathers.slice(0, 7).map((element: Types.Weather) => {
+                weathers.slice(0, 7).map((element: Weather) => {
                     return (
                         <CardDay
                             key = { element.id }
