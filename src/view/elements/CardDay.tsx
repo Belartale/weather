@@ -8,6 +8,7 @@ import rainyImage from '../../assets/images/weather-icon-rainy.png';
 import sunnyImage from '../../assets/images/weather-icon-sunny.png';
 
 //! Types
+
 interface CardDayStyledInterface {
     typeDay: string;
 }
@@ -18,7 +19,6 @@ interface CardDayInterface {
     typeDay: string;
     onClick: any
 }
-
 
 //! Styles
 const Styled = styled.button<CardDayStyledInterface>`

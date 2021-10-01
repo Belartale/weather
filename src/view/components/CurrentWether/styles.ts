@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import rainyImage from '../../../assets/images/rainy.png';
 import humidityImage from '../../../assets/images/humidity.png';
 
+//! Styles
 export const Container = styled.div`
     display: flex;
     flex-direction: column;

@@ -1,4 +1,4 @@
-// Core
+//! Core
 import React, { FC, DetailedHTMLProps, Ref } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -9,7 +9,7 @@ interface ButtonProps extends DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
     disabled?: boolean
 }
 
-// Styles
+//! Styles
 const Styled = styled.button<ButtonProps>`
     background-color: ${({ theme }) => theme.button.primary};
     border: none;
